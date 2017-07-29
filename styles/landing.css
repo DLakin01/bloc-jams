@@ -29,6 +29,13 @@ body.landing {
   position: relative;
 }
 
+.selling-points p {
+  position: relative;
+  font: 'Open Sans';
+  font-weight: 400;
+  margin: 0 auto;
+}
+
 .point {
   position: relative;
   padding: 2rem;
