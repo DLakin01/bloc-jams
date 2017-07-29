@@ -86,7 +86,7 @@ body {
 }
 
 @media (min-width: 1024px) {
-  html { font-size: 120%;}
+  html { font-size: 120%; }
 }
 
 .clearfix::before,
