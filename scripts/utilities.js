@@ -1,7 +1,5 @@
-var forEach = function(sellingPoints) {
-  for(i = 0; i < sellingPoints.length; i++) {
+var forEach = function(array, callback) {
+  for(i = 0; i < array.length; i++) {
     callback(array[i]);
     }
   };
-
-forEach();

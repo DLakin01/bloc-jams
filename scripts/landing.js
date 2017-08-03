@@ -10,9 +10,13 @@ var animatePoints = function() {
         point.style.borderColor = "#FFF";
        };
 
-       for(var i = 0; i < points.length; i++) {
+//The following function is dependent on utilites.js
+
+       forEach(points, revealPoint);
+
+       /*for(var i = 0; i < points.length; i++) {
          revealPoint(points[i]);
-       };
+       };*/
  };
 
 window.onload = function() {
@@ -23,6 +27,8 @@ window.onload = function() {
   var sellingPoints = document.getElementsByClassName('point')[0];
   var scrollDistance = sellingPoints.getBoundingClientRect().top - window.innerHeight + 100;
   window.addEventListener('scroll', function(event) {
+    console.log(document.body.scrollTop);
+    console.log(scrollDistance);
     if(document.documentElement.scrollTop || document.body.scrollTop >= scrollDistance) {
       animatePoints(points);
     }
