@@ -15,7 +15,20 @@ var albumBonIver = {
   ]
 };
 
-//Another Example Album
+var albumFooFighters = {
+  title: "Color and the Shape",
+  artist: "Foo Fighters",
+  label: "Roswell/Capitol",
+  year: "1997",
+  albumArtUrl: "assets/images/album_covers/ColorAndTheShape.jpeg",
+  songs: [
+    {title: "Doll", duration: "1:23"},
+    {title: "Monkey Wrench", duration: "3:51"},
+    {title: "Hey, Johnny Park!", duration: "4:08"},
+    {title: "My Poor Brain", duration: "3:33"},
+    {title: "Everlong", duration: "4:11"}
+  ]
+};
 
 var albumSufjan = {
   title: "Come On! Feel the Illinoise!",
@@ -59,6 +72,23 @@ var setCurrentAlbum = function(album) {
   }
 };
 
+var albumTitle = document.getElementsByClassName('album-view-title')[0];
+var albumArtist = document.getElementsByClassName('album-view-artist')[0];
+var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
+var albumImage = document.getElementsByClassName('album-cover-art')[0];
+var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
+
+var albums = [albumBonIver, albumFooFighters, albumSufjan];
+var i = 1
+
 window.onload = function() {
   setCurrentAlbum(albumBonIver);
+
+  albumImage.addEventListener("click", function(event) {
+    setCurrentAlbum(albums[i])
+    i++;
+    if(i == albums.length) {
+      i = 0;
+    }
+  });
 };
