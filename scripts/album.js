@@ -48,7 +48,7 @@ var albumSufjan = {
 var createSongRow = function(songNumber, songName, songLength) {
   var template =
     '<tr class="album-view-song-item">'
-  +   '<td class="song-item-number">' + songNumber + '</td>'
+  +   '<td class="song-item-number" data-song-number="' + songNumber + '">' + songNumber + '</td>'
   +   '<td class="song-item-title">' + songName + '</td>'
   +   '<td class="song-item-duration">' + songLength + '</td>'
   + '</tr>';
@@ -81,11 +81,28 @@ var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
 var albums = [albumBonIver, albumFooFighters, albumSufjan];
 var i = 1
 
+var songListContainer = document.getElementsByClassName('album-view-song-list')[0];
+var songRows = document.getElementsByClassName('album-view-song-item');
+
+var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
+
 window.onload = function() {
   setCurrentAlbum(albumBonIver);
 
+  songListContainer.addEventListener('mouseover', function(event) {
+    if(event.target.parentElement.className === 'album-view-song-item') {
+      event.target.parentElement.querySelector('.song-item-number').innerHTML = playButtonTemplate;
+    }
+  });
+
+  for(var i = 0; i <songRows.length; i++) {
+    songRows[i].addEventListener('mouseleave', function(event) {
+      this.firstChild.innerHTML = this.firstChild.getAttribute('data-song-number');
+    });
+  };
+
   albumImage.addEventListener("click", function(event) {
-    setCurrentAlbum(albums[i])
+    setCurrentAlbum(albums[i]);
     i++;
     if(i == albums.length) {
       i = 0;
