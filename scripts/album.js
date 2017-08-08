@@ -75,7 +75,6 @@ window.onload = function() {
     if(event.target.parentElement.className === 'album-view-song-item') {
       event.target.parentElement.querySelector('.song-item-number').innerHTML = playButtonTemplate;
       var songItem = getSongItem(event.target);
-      console.log(songItem);
       if(songItem.getAttribute('data-song-number') !== currentlyPlayingSong) {
         songItem.innerHTML = playButtonTemplate;
       }
@@ -113,14 +112,14 @@ var getSongItem = function(element) {
       case 'ion-play':
       case 'ion-pause':
         return findParentByClassName(element, 'song-item-number')
-        //break;
+        break;
       case 'song-item-title':
       case 'song-item-duration':
-        return findParentByClassName(element, 'album-view-song-item').querySelector('song-item-number');
-        //break;
+        findParentByClassName(element, 'album-view-song-item').querySelector('.song-item-number');
+        break;
       case 'album-view-song-item':
-        return element.querySelector('song-item-number');
-        //break;
+        return element.querySelector('.song-item-number');
+        break;
       case 'song-item-number':
         return element;
       default:
