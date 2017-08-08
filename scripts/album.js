@@ -100,11 +100,14 @@ window.onload = function() {
 
 
 var findParentByClassName = function(element, targetClass) {
+    if(element.parentElement) {
     var currentParent = element.parentElement;
     while (currentParent.className !== targetClass && currentParent.className !== null) {
         currentParent = currentParent.parentElement;
+        if(currentParent = document) {console.log("No parent found with that class name")}
     }
     return currentParent;
+  } else if(!element.parentElement) {console.log("No parent element found")}
 };
 
 var getSongItem = function(element) {
