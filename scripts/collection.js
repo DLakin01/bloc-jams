@@ -50,22 +50,26 @@ var setAlbumCollection = function() {
   var albumTitle = document.getElementsByClassName('album-name')[0];
   var albumArtist = document.getElementsByClassName('album-artist')[0];
   var albumImage = document.getElementsByClassName('album-image')[0];
+  var albumContainer = document.getElementsByClassName('collection-album-container')[0];
+  albumContainer.innerHTML = '';
   for(var i = 0; i < albumList.length; i++) {
-    albumTitle.innerHTML = albumList[i].title;
-    albumArtist.innerHTML = albumList[i].artist;
-    albumImage.setAttribute('src', albumList[i].albumArtUrl);
+    albumContainer.innerHTML += createCollectionItem(albumList[i].albumArtUrl, albumList[i].title, albumList[i].artist);
   }
 };
 
-var collectionItemTemplate =
+var createCollectionItem = function(image, title, artist) {
+  var template =
   '<div class="collection-album-container column third">'
-+ '   <img class="album-image" src="">'
++ '   <img class="album-image" src="' + image + '">'
 + '   <div class="collection-album-info caption">'
-+ '       <a class="album-name" href="album.html"></a>'
++ '       <a class="album-name" href="album.html">' + title + '</a>'
 + '       <br>'
-+ '       <a class="album-artist" href="album.html">Bon Iver</a>'
++ '       <a class="album-artist" href="#">' + artist + '</a>'
 + '   </div>'
-+ '</div>'
++ '</div>';
+
+  return template;
+}
 
 
 window.onload = function() {
