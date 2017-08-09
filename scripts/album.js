@@ -96,7 +96,12 @@ window.onload = function() {
 
    for(var i = 0; i < songRows.length; i++) {
      songRows[i].addEventListener('mouseleave', function(event) {
-      this.firstChild.innerHTML = this.firstChild.getAttribute('data-song-number');
+      var songItem = getSongItem(event.target);
+      if(songItem !== currentlyPlayingSong) {
+        this.firstChild.innerHTML = this.firstChild.getAttribute('data-song-number');
+      } else if(songItem === currentlyPlayingSong) {
+        songItem.innerHTML = pauseButtonTemplate;
+      }
      });
      songRows[i].addEventListener('click', function(event) {
        clickHandler(event.target);
@@ -149,7 +154,7 @@ var clickHandler = function(targetElement) {
     songItem.innerHTML = playButtonTemplate;
     currentlyPlayingSong = null;
   } else if(currentlyPlayingSong !== songItem) {
-      var currentlyPlayingSongElement = document.querySelector('[data-song-number="' + currentlyPlayingSong + '"]');
+      currentlyPlayingSong.innerHTML = currentlyPlayingSong.getAttribute('data-song-number');
       songItem.innerHTML = pauseButtonTemplate;
       currentlyPlayingSong = songItem;
   }

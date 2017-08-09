@@ -46,7 +46,6 @@ var albumSufjan = {
 var albumList = [albumBonIver, albumFooFighters, albumSufjan];
 
 var setAlbumCollection = function() {
-
   var albumTitle = document.getElementsByClassName('album-name')[0];
   var albumArtist = document.getElementsByClassName('album-artist')[0];
   var albumImage = document.getElementsByClassName('album-image')[0];
@@ -54,7 +53,7 @@ var setAlbumCollection = function() {
   albumContainer.innerHTML = '';
   for(var i = 0; i < albumList.length; i++) {
     albumContainer.innerHTML += createCollectionItem(albumList[i].albumArtUrl, albumList[i].title, albumList[i].artist);
-  }
+  };
 };
 
 var createCollectionItem = function(image, title, artist) {
