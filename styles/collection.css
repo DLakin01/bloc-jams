@@ -22,15 +22,19 @@ body.collection {
 .collection-album-container .caption p {
   font-size: 1rem;
   font-weight: 300;
-  color: rgba(255,255,255,0.6);
+  color: white;
 }
 
 .collection-album-container .caption p a {
   color: rgba(255,255,255,0.6);
 }
 
-.collection-album-container .caption p a.album-name {
-  color: #FFF ;
+a.album-name {
+  color: white;
+}
+
+a.album-artist {
+  color: white;
 }
 
 .collection-album-container img {

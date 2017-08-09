@@ -27,6 +27,10 @@ body.album {
   font-size: 1.5rem;
 }
 
+.album-name a {
+  color: white;
+}
+
 .album-view-details .album-view-release-info {
   font-weight: 600;
   font-size: 0.75rem;

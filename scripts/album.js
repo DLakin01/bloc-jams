@@ -15,7 +15,20 @@ var albumBonIver = {
   ]
 };
 
-//Another Example Album
+var albumFooFighters = {
+  title: "Color and the Shape",
+  artist: "Foo Fighters",
+  label: "Roswell/Capitol",
+  year: "1997",
+  albumArtUrl: "assets/images/album_covers/ColorAndTheShape.jpeg",
+  songs: [
+    {title: "Doll", duration: "1:23"},
+    {title: "Monkey Wrench", duration: "3:51"},
+    {title: "Hey, Johnny Park!", duration: "4:08"},
+    {title: "My Poor Brain", duration: "3:33"},
+    {title: "Everlong", duration: "4:11"}
+  ]
+};
 
 var albumSufjan = {
   title: "Come On! Feel the Illinoise!",
@@ -115,7 +128,7 @@ var getSongItem = function(element) {
         break;
       case 'song-item-title':
       case 'song-item-duration':
-        findParentByClassName(element, 'album-view-song-item').querySelector('.song-item-number');
+        return findParentByClassName(element, 'album-view-song-item').querySelector('.song-item-number');
         break;
       case 'album-view-song-item':
         return element.querySelector('.song-item-number');
