@@ -2,9 +2,9 @@ var animatePoints = function() {
      var revealPoint = function() {
         $(this).css({
           opacity: 1,
-          transform: 'scaleX(1) translateY(0)'
-          //border-color: 'white'
-          //border-style: 'solid inset'
+          transform: 'scale(0.8) translateY(0)',
+          "border-color": 'white',
+          "border-style": 'solid inset',
       });
     };
 
