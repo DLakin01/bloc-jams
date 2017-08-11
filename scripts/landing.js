@@ -1,36 +1,27 @@
-var points = document.getElementsByClassName('point');
-
 var animatePoints = function() {
-     var revealPoint = function(point) {
-        point.style.opacity = 1;
-        point.style.transform = "scale(0.8, 0.8) translateY(0)";
-        point.style.msTransform = "scale(0.8, 0.8) translateY(0)";
-        point.style.WebkitTransform = "scale(0.8, 0.8) translateY(0)";
-        point.style.borderStyle = "solid inset";
-        point.style.borderColor = "#FFF";
-       };
+     var revealPoint = function() {
+        $(this).css({
+          opacity: 1,
+          transform: 'scaleX(1) translateY(0)'
+          //border-color: 'white'
+          //border-style: 'solid inset'
+      });
+    };
 
 //The following function is dependent on utilites.js
 
-       forEach(points, revealPoint);
-
-       /*for(var i = 0; i < points.length; i++) {
-         revealPoint(points[i]);
-       };*/
+       $.each($('.point'), revealPoint);
  };
 
-window.onload = function() {
-  if (window.innerHeight > 950) {
-    animatePoints(points);
+$(window).load(function() {
+  if ($(window).height > 950) {
+    animatePoints();
   }
 
-  var sellingPoints = document.getElementsByClassName('point')[0];
-  var scrollDistance = sellingPoints.getBoundingClientRect().top - window.innerHeight + 100;
-  window.addEventListener('scroll', function(event) {
-    console.log(document.body.scrollTop);
-    console.log(scrollDistance);
-    if(document.documentElement.scrollTop || document.body.scrollTop >= scrollDistance) {
-      animatePoints(points);
+  var $scrollDistance = $('.selling-points').offset().top - $(window).height() + 100;
+  $(window).scroll(function(event) {
+    if($(window).scrollTop() >= $scrollDistance) {
+      animatePoints();
     }
   });
-}
+});
