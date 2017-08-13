@@ -45,34 +45,35 @@ var albumSufjan = {
 
 var albumList = [albumBonIver, albumFooFighters, albumSufjan];
 
-var setAlbumCollection = function() {
-  var albumTitle = document.getElementsByClassName('album-name')[0];
-  var albumArtist = document.getElementsByClassName('album-artist')[0];
-  var albumImage = document.getElementsByClassName('album-image')[0];
-  var albumContainer = document.getElementsByClassName('collection-album-container')[0];
-  albumContainer.innerHTML = '';
-  for(var i = 0; i < albumList.length; i++) {
-    albumContainer.innerHTML += createCollectionItem(albumList[i].albumArtUrl, albumList[i].title, albumList[i].artist);
-  };
-};
+/*var setAlbumCollection = function(album) {
+  var albumTitle = album.title;
+  var albumArtist = album.artist;
+  var albumImage = album.albumArtUrl;
+  buildCollectionTemplate(albumTitle, albumArtist, albumImage);
+  return
+};*/
 
-var createCollectionItem = function(image, title, artist) {
+var buildCollectionTemplate = function(album) {
   var template =
   '<div class="collection-album-container column third">'
-+ '   <img class="album-image" src="' + image + '">'
++ '   <img class="album-image" src="' + album.albumArtUrl + '">'
 + '   <div class="collection-album-info caption">'
-+ '       <a class="album-name" href="album.html">' + title + '</a>'
++ '       <a class="album-name" href="album.html">' + album.title + '</a>'
 + '       <br>'
-+ '       <a class="album-artist" href="#">' + artist + '</a>'
++ '       <a class="album-artist" href="#">' + album.artist + '</a>'
 + '   </div>'
 + '</div>';
 
   return template;
-}
+};
 
 
-window.onload = function() {
-   //var collectionContainer = document.getElementsByClassName('album-covers')[0];
-   //collectionContainer.innerHTML = '';
-   setAlbumCollection();
- };
+$(window).load(function() {
+   var $collectionContainer = $('.album-covers');
+   $collectionContainer.empty();
+
+   for(var i = 0; i<albumList.length; i++) {
+     var $newThumbnail = buildCollectionTemplate(albumList[i]);
+     $collectionContainer.append($newThumbnail);
+   }
+ });
