@@ -58,14 +58,17 @@ var createSongRow = function(songNumber, songName, songLength) {
   var clickHandler = function() {
     var $songNumber = $(this).attr('data-song-number');
     if(currentlyPlayingSong !== null) {
+      //Restores the number of the previously played song
       var currentlyPlayingCell = $('.song-item-number[data-song-number="' + currentlyPlayingSong + '"]');
       currentlyPlayingCell.html(currentlyPlayingSong);
     }
     if(currentlyPlayingSong !== $songNumber) {
+      //Takes care of null case and another-song case, sets pause button until something else happens
       $(this).html(pauseButtonTemplate);
       currentlyPlayingSong = $songNumber;
     }
     else if(currentlyPlayingSong === $songNumber) {
+      //If currently playing song is clicked, restores play button and sets currently playing song to null
       $(this).html(playButtonTemplate);
       currentlyPlayingSong = null;
     }
