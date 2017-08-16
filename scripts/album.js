@@ -113,7 +113,21 @@ var previousSong = function() {
   var $lastSongNumberCell = getSongNumberCell(lastSongNumber);
   $nextSongNumberCell.html(pauseButtonTemplate);
   $lastSongNumberCell.html(lastSongNumber);
-}
+};
+
+var togglePlayFromPlayerBar = function() {
+  var $songNumberCell = getSongNumberCell(currentlyPlayingSongNumber);
+  if(currentSoundFile.isPaused()) {
+    $songNumberCell.html(pauseButtonTemplate);
+    $(this).html(playerBarPauseButton);
+    currentSoundFile.play();
+  }
+  else {
+    $songNumberCell.html(playButtonTemplate);
+    $(this).html(playerBarPlayButton);
+    currentSoundFile.pause();
+  }
+};
 
 var updatePlayerBarSong = function(event) {
   $(".currently-playing .song-name").text(currentSongFromAlbum.title);
@@ -159,9 +173,11 @@ var currentVolume = 80;
 
 var $previousButton = $('.main-controls .previous');
 var $nextButton = $('.main-controls .next');
+var $playerControl = $('.main-controls .play-pause');
 
 $(document).ready(function() {
   setCurrentAlbum(albumBonIver);
   $previousButton.click(previousSong);
   $nextButton.click(nextSong);
+  $playerControl.click(togglePlayFromPlayerBar);
 });
