@@ -5,11 +5,11 @@ var albumBonIver = {
   year: "2016",
   albumArtUrl: 'assets/images/album_covers/22aMillion.jpeg',
   songs: [
-    {title: "22 (OVER S∞∞N)", duration: "2:48"},
-    {title: "10 d E A T h b R E a s T ⚄ ⚄", duration: "2:24"},
-    {title: "715 - CR∑∑KS", duration: "2:12"},
-    {title: "33 \"GOD\"", duration: "3:33"},
-    {title: "29 #Strafford APTS", duration: "4:05"},
+    {title: "22 (OVER S∞∞N)", duration: "2:48", audioUrl: "assets/music/22, A Million/22 (OVER SN)"},
+    {title: "10 d E A T h b R E a s T ⚄ ⚄", duration: "2:24", audioUrl: "assets/music/22, A Million/10 d E A T h b R E a s T"},
+    {title: "715 - CR∑∑KS", duration: "2:12", audioUrl: "assets/music/22, A Million/715 - CRKS"},
+    {title: "33 \"GOD\"", duration: "3:33", audioUrl: "assets/music/22, A Million/33 GOD"},
+    {title: "29 #Strafford APTS", duration: "4:05", audioUrl: "assets/music/22, A Million/29 Strafford APTS"}
   ]
 };
 
@@ -20,11 +20,11 @@ var albumFooFighters = {
   year: "1997",
   albumArtUrl: "assets/images/album_covers/ColorAndTheShape.jpeg",
   songs: [
-    {title: "Doll", duration: "1:23"},
-    {title: "Monkey Wrench", duration: "3:51"},
-    {title: "Hey, Johnny Park!", duration: "4:08"},
-    {title: "My Poor Brain", duration: "3:33"},
-    {title: "Everlong", duration: "4:11"}
+    {title: "Doll", duration: "1:23", audioUrl: "assets/music/The Color and the Shape/Doll"},
+    {title: "Monkey Wrench", duration: "3:51", audioUrl: "assets/music/The Color and the Shape/Monkey Wrench"},
+    {title: "Hey, Johnny Park!", duration: "4:08", audioUrl: "assets/music/The Color and the Shape/Hey, Johnny Park!"},
+    {title: "My Poor Brain", duration: "3:33", audioUrl: "assets/music/The Color and the Shape/My Poor Brain"},
+    {title: "Everlong", duration: "4:11", audioUrl: "assets/music/The Color and the Shape/Everlong"}
   ]
 };
 
@@ -35,10 +35,10 @@ var albumSufjan = {
   year: "2005",
   albumArtUrl: 'assets/images/album_covers/Illinoise.jpeg',
   songs: [
-    {title: "Concerning the UFO Sighting near Highland, Illinois", duration: "2:08"},
-    {title: "The Black Hawk War", duration: "2:14"},
-    {title: "Come On! Feel the Illinoise!", duration: "6:45"},
-    {title: "John Wayne Gacy, Jr.", duration: "3:19"},
-    {title: "Jacksonville", duration: "5:24"}
+    {title: "Concerning the UFO Sighting near Highland, Illinois", duration: "2:08", audioUrl: "assets/music/Come On! Feel the Illinoise!/Concerning the UFO Sighting Near Highland, Illinois"},
+    {title: "The Black Hawk War", duration: "2:14", audioUrl: "assets/music/Come On! Feel the Illinoise!/The Black Hawk War"},
+    {title: "Come On! Feel the Illinoise!", duration: "6:45", audioUrl: "assets/music/Come On! Feel the Illinoise!/Come On! Feel the Illinoise!"},
+    {title: "John Wayne Gacy, Jr.", duration: "3:19", audioUrl: "assets/music/Come On! Feel the Illinoise!/John Wayne Gacy, Jr."},
+    {title: "Jacksonville", duration: "5:24", audioUrl: "assets/music/Come On! Feel the Illinoise!/Jacksonville"}
   ]
 };

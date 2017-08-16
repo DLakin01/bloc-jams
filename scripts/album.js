@@ -1,48 +1,3 @@
-var albumBonIver = {
-  title: "22, A Million",
-  artist: "Bon Iver",
-  label: "Jagjaguwar",
-  year: "2016",
-  albumArtUrl: 'assets/images/album_covers/22aMillion.jpeg',
-  songs: [
-    {title: "22 (OVER S∞∞N)", duration: "2:48"},
-    {title: "10 d E A T h b R E a s T ⚄ ⚄", duration: "2:24"},
-    {title: "715 - CR∑∑KS", duration: "2:12"},
-    {title: "33 \"GOD\"", duration: "3:33"},
-    {title: "29 #Strafford APTS", duration: "4:05"},
-  ]
-};
-
-var albumFooFighters = {
-  title: "Color and the Shape",
-  artist: "Foo Fighters",
-  label: "Roswell/Capitol",
-  year: "1997",
-  albumArtUrl: "assets/images/album_covers/ColorAndTheShape.jpeg",
-  songs: [
-    {title: "Doll", duration: "1:23"},
-    {title: "Monkey Wrench", duration: "3:51"},
-    {title: "Hey, Johnny Park!", duration: "4:08"},
-    {title: "My Poor Brain", duration: "3:33"},
-    {title: "Everlong", duration: "4:11"}
-  ]
-};
-
-var albumSufjan = {
-  title: "Come On! Feel the Illinoise!",
-  artist: "Sufjan Stevens",
-  label: "Asthmatic Kitty Records",
-  year: "2005",
-  albumArtUrl: 'assets/images/album_covers/Illinoise.jpeg',
-  songs: [
-    {title: "Concerning the UFO Sighting near Highland, Illinois", duration: "2:08"},
-    {title: "The Black Hawk War", duration: "2:14"},
-    {title: "Come On! Feel the Illinoise!", duration: "6:45"},
-    {title: "John Wayne Gacy, Jr.", duration: "3:19"},
-    {title: "Jacksonville", duration: "5:24"}
-  ]
-};
-
 var createSongRow = function(songNumber, songName, songLength) {
   var template =
     '<tr class="album-view-song-item">'
@@ -57,22 +12,29 @@ var createSongRow = function(songNumber, songName, songLength) {
     var $songNumber = $(this).attr('data-song-number');
     if(currentlyPlayingSongNumber !== null) {
       //Restores the number of the previously played song
-      var currentlyPlayingCell = getSongNumberCell($songNumber);
+      var currentlyPlayingCell = getSongNumberCell(currentlyPlayingSongNumber);
       currentlyPlayingCell.html(currentlyPlayingSongNumber);
     }
     if(currentlyPlayingSongNumber !== $songNumber) {
       //Takes care of null case and another-song case, sets pause button until something else happens
-      $(this).html(pauseButtonTemplate);
       setSong($songNumber);
-      updatePlayerBarSong();
+      currentSoundFile.play();
+      console.log(currentSoundFile);
       $(this).html(pauseButtonTemplate);
+      updatePlayerBarSong();
     }
     else if(currentlyPlayingSongNumber === $songNumber) {
       //If currently playing song is clicked, restores play button and sets currently playing song to null
-      $(this).html(playButtonTemplate);
-      currentlyPlayingSongNumber = null;
-      currentSongFromAlbum = null;
-      $('.main-controls .play-pause').html(playerBarPlayButton);
+      if(currentSoundFile.isPaused()) {
+        currentSoundFile.play();
+        $(this).html(pauseButtonTemplate);
+        $('.main-controls .play-pause').html(playerBarPauseButton);
+      }
+      else {
+        currentSoundFile.pause();
+        $(this).html(playButtonTemplate);
+        $('.main-controls .play-pause').html(playerBarPlayButton);
+      }
     }
   };
 
@@ -127,6 +89,7 @@ var nextSong = function() {
     currentIndex = 0;
   }
   setSong(currentIndex + 1);
+  currentSoundFile.play();
   updatePlayerBarSong();
   $('.main-controls .play-pause').html(playerBarPauseButton);
   var $nextSongNumberCell = getSongNumberCell(currentlyPlayingSongNumber);
@@ -143,6 +106,7 @@ var previousSong = function() {
     currentIndex = currentAlbum.songs.length - 1;
   }
   setSong(currentIndex + 1);
+  currentSoundFile.play();
   updatePlayerBarSong();
   $('.main-controls .play-pause').html(playerBarPauseButton);
   var $nextSongNumberCell = getSongNumberCell(currentlyPlayingSongNumber);
@@ -159,8 +123,22 @@ var updatePlayerBarSong = function(event) {
 };
 
 var setSong = function(songNumber) {
-  currentlyPlayingSongNumber = parseInt(songNumber);
+if(currentSoundFile) {
+  currentSoundFile.stop();
+}
+  currentlyPlayingSongNumber = songNumber;
   currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
+  currentSoundFile = new buzz.sound(currentSongFromAlbum.audioUrl, {
+    formats: ['mp3'],
+    preload: true
+  });
+  setVolume(currentVolume)
+};
+
+var setVolume = function(volume) {
+  if(currentSoundFile) {
+    currentSoundFile.setVolume(volume);
+  }
 };
 
 var getSongNumberCell = function(number) {
@@ -175,13 +153,15 @@ var playerBarPauseButton = '<span class="ion-pause"></span>';
 //store state of playing songs
 var currentAlbum = null;
 var currentlyPlayingSongNumber = null;
-var currentSongFromAlbum = null
+var currentSongFromAlbum = null;
+var currentSoundFile = null;
+var currentVolume = 80;
 
 var $previousButton = $('.main-controls .previous');
 var $nextButton = $('.main-controls .next');
 
 $(document).ready(function() {
-  setCurrentAlbum(albumFooFighters);
+  setCurrentAlbum(albumBonIver);
   $previousButton.click(previousSong);
   $nextButton.click(nextSong);
 });
