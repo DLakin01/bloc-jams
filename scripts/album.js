@@ -65,6 +65,7 @@ var createSongRow = function(songNumber, songName, songLength) {
       $(this).html(pauseButtonTemplate);
       setSong($songNumber);
       updatePlayerBarSong();
+      $(this).html(pauseButtonTemplate);
     }
     else if(currentlyPlayingSongNumber === $songNumber) {
       //If currently playing song is clicked, restores play button and sets currently playing song to null
