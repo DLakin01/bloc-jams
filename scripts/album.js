@@ -118,28 +118,20 @@ var trackIndex = function(album, song) {
   return album.songs.indexOf(song);
 }
 
-var nextSong = function() {
+var songChange = function() {
   var currentIndex = trackIndex(currentAlbum, currentSongFromAlbum);
   var lastSongNumber = currentlyPlayingSongNumber;
-  currentIndex++;
-  if(currentIndex >= currentAlbum.songs.length) {
-    currentIndex = 0;
+  if($(this) = $nextButton) {
+    currentIndex++;
+    if(currentIndex >= currentAlbum.songs.length) {
+      currentIndex = 0;
+    }
   }
-  setSong(currentIndex + 1);
-  updatePlayerBarSong();
-  $('.main-controls .play-pause').html(playerBarPauseButton);
-  var $nextSongNumberCell = getSongNumberCell(currentlyPlayingSongNumber);
-  var $lastSongNumberCell = getSongNumberCell(lastSongNumber);
-  $nextSongNumberCell.html(pauseButtonTemplate);
-  $lastSongNumberCell.html(lastSongNumber);
-}
-
-var previousSong = function() {
-  var currentIndex = trackIndex(currentAlbum, currentSongFromAlbum);
-  var lastSongNumber = currentlyPlayingSongNumber;
-  currentIndex--;
-  if(currentIndex < 0) {
-    currentIndex = currentAlbum.songs.length - 1;
+  else if($(this) = $previousButton) {
+    currentIndex--;
+    if(currentIndex < 0) {
+      currentIndex = currentAlbum.songs.length - 1;
+    }
   }
   setSong(currentIndex + 1);
   updatePlayerBarSong();
@@ -181,6 +173,6 @@ var $nextButton = $('.main-controls .next');
 
 $(document).ready(function() {
   setCurrentAlbum(albumFooFighters);
-  $previousButton.click(previousSong);
-  $nextButton.click(nextSong);
+  $previousButton.click(songChange);
+  $nextButton.click(songChange);
 });
