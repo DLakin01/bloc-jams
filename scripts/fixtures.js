@@ -4,6 +4,7 @@ var albumBonIver = {
   label: "Jagjaguwar",
   year: "2016",
   albumArtUrl: 'assets/images/album_covers/22aMillion.jpeg',
+  albumURL: 'album.html?albumID=1',
   songs: [
     {title: "22 (OVER S∞∞N)", duration: "2:48", audioUrl: "assets/music/22, A Million/22 (OVER SN)"},
     {title: "10 d E A T h b R E a s T ⚄ ⚄", duration: "2:24", audioUrl: "assets/music/22, A Million/10 d E A T h b R E a s T"},
@@ -19,6 +20,7 @@ var albumFooFighters = {
   label: "Roswell/Capitol",
   year: "1997",
   albumArtUrl: "assets/images/album_covers/ColorAndTheShape.jpeg",
+  albumURL: 'album.html?albumID=2',
   songs: [
     {title: "Doll", duration: "1:23", audioUrl: "assets/music/The Color and the Shape/Doll"},
     {title: "Monkey Wrench", duration: "3:51", audioUrl: "assets/music/The Color and the Shape/Monkey Wrench"},
@@ -34,6 +36,7 @@ var albumSufjan = {
   label: "Asthmatic Kitty Records",
   year: "2005",
   albumArtUrl: 'assets/images/album_covers/Illinoise.jpeg',
+  albumURL: 'album.html?albumID=3',
   songs: [
     {title: "Concerning the UFO Sighting near Highland, Illinois", duration: "2:08", audioUrl: "assets/music/Come On! Feel the Illinoise!/Concerning the UFO Sighting Near Highland, Illinois"},
     {title: "The Black Hawk War", duration: "2:14", audioUrl: "assets/music/Come On! Feel the Illinoise!/The Black Hawk War"},

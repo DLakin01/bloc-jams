@@ -51,12 +51,24 @@ var createSongRow = function(songNumber, songName, songLength) {
     if($number !== currentlyPlayingSongNumber) {
       $songNumberCell.html($number)
     }
-    //console.log("songNumber type is " + typeof songNumber + "\n and currentlyPlayingSongNumber type is " + typeof currentlyPlayingSongNumber);
   };
 
   $row.find('.song-item-number').click(clickHandler);
   $row.hover(onHover, offHover);
   return $row;
+};
+
+var albumPicker = function() {
+  var queryData = new QueryData;
+  if(queryData.albumID === '1') {
+    setCurrentAlbum(albumBonIver);
+  }
+  else if(queryData.albumID === '2') {
+    setCurrentAlbum(albumFooFighters);
+  }
+  else if(queryData.albumID === '3') {
+    setCurrentAlbum(albumSufjan);
+  }
 };
 
 var setCurrentAlbum = function(album) {
@@ -161,7 +173,7 @@ var $previousButton = $('.main-controls .previous');
 var $nextButton = $('.main-controls .next');
 
 $(document).ready(function() {
-  setCurrentAlbum(albumBonIver);
+  albumPicker();
   $previousButton.click(previousSong);
   $nextButton.click(nextSong);
 });
