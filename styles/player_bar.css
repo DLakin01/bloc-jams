@@ -103,9 +103,14 @@
 
 .seek-bar .fill {
   background-color: white;
-  width:  36%;
+  width:  0%;
   height: 0.25rem;
   border-radius: 2px;
+}
+
+.seek-control .seek-bar .thumb,
+.seek-control .seek-bar .fill {
+  opacity: 0;
 }
 
 .seek-bar .thumb {
@@ -113,15 +118,16 @@
   height: 0.6rem;
   width: 0.6rem;
   background-color: white;
-  left: 36%;
+  left: 0;
   top: 50%;
   margin-left: -0.25rem;
   margin-top: -0.25rem;
   border-radius: 50%;
   cursor: pointer;
-  -webkit-transition: all 70ms ease-in-out;
-  -moz-transition: all 70ms ease-in-out;
-  transition: all 70ms ease-in-out;
+  transition: width 70ms ease-in-out,
+              height 70ms ease-in-out,
+              margin-top 70ms ease-in-out,
+              margin-left: 70ms ease-in-out;
 }
 
 .seek-bar:hover .thumb {
@@ -147,6 +153,11 @@
   display: inline-block;
   width: 5.75rem;
   vertical-align: middle;
+}
+
+.volume .seek-bar .thumb,
+.volume .seek-bar .fill {
+  opacity: 1;
 }
 
 @media (max-width: 640px) {

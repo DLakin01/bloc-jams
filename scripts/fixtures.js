@@ -10,7 +10,12 @@ var albumBonIver = {
     {title: "10 d E A T h b R E a s T ⚄ ⚄", duration: "2:24", audioUrl: "assets/music/22, A Million/10 d E A T h b R E a s T"},
     {title: "715 - CR∑∑KS", duration: "2:12", audioUrl: "assets/music/22, A Million/715 - CRKS"},
     {title: "33 \"GOD\"", duration: "3:33", audioUrl: "assets/music/22, A Million/33 GOD"},
-    {title: "29 #Strafford APTS", duration: "4:05", audioUrl: "assets/music/22, A Million/29 Strafford APTS"}
+    {title: "29 #Strafford APTS", duration: "4:05", audioUrl: "assets/music/22, A Million/29 Strafford APTS"},
+    {title: "666 ʇ", duration: "4:12", audioUrl: "assets/music/22, A Million/666"},
+    {title: "21 M◊◊N WATER", duration: "3:08", audioUrl: "assets/music/22, A Million/21 MN WATER"},
+    {title: "8 (Circle)", duration: "5:09", audioUrl: "assets/music/22, A Million/8 (Circle)"},
+    {title: "____45_____", duration: "2:46", audioUrl: "assets/music/22, A Million/45"},
+    {title: "000000 (Million)", duration: "3:53", audioUrl: "assets/music/22, A Million/000000 (Million)"}
   ]
 };
 

@@ -19,7 +19,18 @@ var createSongRow = function(songNumber, songName, songLength) {
       //Takes care of null case and another-song case, sets pause button until something else happens
       setSong($songNumber);
       currentSoundFile.play();
-      console.log(currentSoundFile);
+      currentVolume = 50
+      $('.seek-control .seek-bar .thumb').css({
+        "opacity": "1"
+      });
+      $('.seek-control .seek-bar .fill').css({
+        "opacity": "1"
+      });
+      $('.volume .fill').width(currentVolume + '%');
+      $('.volume .thumb').css({
+        "left": currentVolume + '%'
+      });
+      updateSeekBar();
       $(this).html(pauseButtonTemplate);
       updatePlayerBarSong();
     }
@@ -27,11 +38,24 @@ var createSongRow = function(songNumber, songName, songLength) {
       //If currently playing song is clicked, restores play button and sets currently playing song to null
       if(currentSoundFile.isPaused()) {
         currentSoundFile.play();
+        $('.seek-control .seek-bar .thumb').css({
+          "opacity": "1"
+        });
+        $('.seek-control .seek-bar .fill').css({
+          "opacity": "1"
+        });
+        updateSeekBar();
         $(this).html(pauseButtonTemplate);
         $('.main-controls .play-pause').html(playerBarPauseButton);
       }
       else {
         currentSoundFile.pause();
+        $('.seek-control .seek-bar .thumb').css({
+          "opacity": "0"
+        });
+        $('.seek-control .seek-bar .fill').css({
+          "opacity": "0"
+        });
         $(this).html(playButtonTemplate);
         $('.main-controls .play-pause').html(playerBarPlayButton);
       }
@@ -89,6 +113,60 @@ var setCurrentAlbum = function(album) {
   }
 };
 
+var updateSeekBar = function() {
+  if(currentSoundFile) {
+    currentSoundFile.bind('timeupdate', function(event) {
+      var seekBarFillRatio = this.getTime() / this.getDuration();
+      var $seekBar = $('.seek-control .seek-bar');
+      updateSeekPercentage($seekBar, seekBarFillRatio);
+    });
+  }
+};
+
+var updateSeekPercentage = function($seekBar, seekBarFillRatio) {
+  var offsetXPercent = seekBarFillRatio * 100;
+  offsetXPercent = Math.max(0, offsetXPercent);
+  offsetXPercent = Math.min(100, offsetXPercent);
+  var percentageString = offsetXPercent + '%';
+  $seekBar.find('.fill').width(percentageString);
+  $seekBar.find('.thumb').css({left: percentageString});
+};
+
+var setUpSeekBars = function() {
+  var $seekBars = $('.player-bar .seek-bar');
+  $seekBars.click(function(event) {
+    var offsetX = event.pageX - $(this).offset().left;
+    var barWidth = $(this).width();
+    var seekBarFillRatio = offsetX / barWidth;
+    if($(this).parent().attr('class') == 'seek-control') {
+      seek(seekBarFillRatio * currentSoundFile.getDuration());
+    }
+    else {
+      setVolume(seekBarFillRatio * 100);
+    }
+    updateSeekPercentage($(this), seekBarFillRatio);
+  });
+  $seekBars.find('.thumb').mousedown(function(event) {
+    var $seekBar = $(this).parent();
+    $(document).bind('mousemove.thumb', function(event) {
+      var offsetX = event.pageX - $seekBar.offset().left;
+      var barWidth = $seekBar.width();
+      var seekBarFillRatio = offsetX / barWidth;
+      if($(this).parent().attr('class') == 'seek-control') {
+        seek(seekBarFillRatio * currentSoundFile.getDuration());
+      }
+      else {
+        setVolume(seekBarFillRatio * 100);
+      }
+      updateSeekPercentage($seekBar, seekBarFillRatio);
+    });
+    $(document).bind('mouseup.thumb', function() {
+      $(document).unbind('mousemove.thumb');
+      $(document).unbind('mouseup.thumb');
+    });
+  });
+};
+
 var trackIndex = function(album, song) {
   return album.songs.indexOf(song);
 }
@@ -102,6 +180,13 @@ var nextSong = function() {
   }
   setSong(currentIndex + 1);
   currentSoundFile.play();
+  $('.seek-control .seek-bar .thumb').css({
+    "opacity": "1"
+  });
+  $('.seek-control .seek-bar .fill').css({
+    "opacity": "1"
+  });
+  updateSeekBar();
   updatePlayerBarSong();
   $('.main-controls .play-pause').html(playerBarPauseButton);
   var $nextSongNumberCell = getSongNumberCell(currentlyPlayingSongNumber);
@@ -119,6 +204,13 @@ var previousSong = function() {
   }
   setSong(currentIndex + 1);
   currentSoundFile.play();
+  $('.seek-control .seek-bar .thumb').css({
+    "opacity": "1"
+  });
+  $('.seek-control .seek-bar .fill').css({
+    "opacity": "1"
+  });
+  updateSeekBar();
   updatePlayerBarSong();
   $('.main-controls .play-pause').html(playerBarPauseButton);
   var $nextSongNumberCell = getSongNumberCell(currentlyPlayingSongNumber);
@@ -133,11 +225,23 @@ var togglePlayFromPlayerBar = function() {
     $songNumberCell.html(pauseButtonTemplate);
     $(this).html(playerBarPauseButton);
     currentSoundFile.play();
+    $('.seek-control .seek-bar .thumb').css({
+      "opacity": "1"
+    });
+    $('.seek-control .seek-bar .fill').css({
+      "opacity": "1"
+    });
   }
   else {
     $songNumberCell.html(playButtonTemplate);
     $(this).html(playerBarPlayButton);
     currentSoundFile.pause();
+    $('.seek-control .seek-bar .thumb').css({
+      "opacity": "0"
+    });
+    $('.seek-control .seek-bar .fill').css({
+      "opacity": "0"
+    });
   }
 }
 
@@ -151,6 +255,12 @@ var updatePlayerBarSong = function(event) {
 var setSong = function(songNumber) {
 if(currentSoundFile) {
   currentSoundFile.stop();
+  $('.seek-control .seek-bar .thumb').css({
+    "opacity": "0"
+  });
+  $('.seek-control .seek-bar .fill').css({
+    "opacity": "0"
+  });
 }
   currentlyPlayingSongNumber = songNumber;
   currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
@@ -159,6 +269,12 @@ if(currentSoundFile) {
     preload: true
   });
   setVolume(currentVolume)
+};
+
+var seek = function(time) {
+  if(currentSoundFile) {
+    currentSoundFile.setTime(time);
+  }
 };
 
 var setVolume = function(volume) {
@@ -189,6 +305,7 @@ var $playerControl = $('.main-controls .play-pause');
 
 $(document).ready(function() {
   albumPicker();
+  setUpSeekBars();
   $previousButton.click(previousSong);
   $nextButton.click(nextSong);
   $playerControl.click(togglePlayFromPlayerBar)
