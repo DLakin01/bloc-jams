@@ -113,12 +113,29 @@ var setCurrentAlbum = function(album) {
   }
 };
 
+var filterTimeCode = function(timeInSeconds) {
+  var seconds = Math.floor(parseFloat(timeInSeconds));
+  var minutes = Math.floor(seconds/60);
+  if(seconds > 59 || seconds > 119 || seconds > 179 || seconds > 239 || seconds > 299 || seconds > 359) {seconds -= (minutes*60)};
+  if(seconds < 10) {return minutes + ":0" + seconds}
+  else {return minutes + ":" + seconds}
+};
+
+var setCurrentTime = function(currentTime) {
+  $('.current-time').text(filterTimeCode(currentTime));
+};
+
+var setTotalTime = function(totalTime) {
+  $('.total-time').text(totalTime);
+};
+
 var updateSeekBar = function() {
   if(currentSoundFile) {
     currentSoundFile.bind('timeupdate', function(event) {
       var seekBarFillRatio = this.getTime() / this.getDuration();
       var $seekBar = $('.seek-control .seek-bar');
       updateSeekPercentage($seekBar, seekBarFillRatio);
+      setCurrentTime(this.getTime());
     });
   }
 };
@@ -250,6 +267,7 @@ var updatePlayerBarSong = function(event) {
   $(".currently-playing .artist-song-mobile").text(currentSongFromAlbum.title + " - " + currentAlbum.artist);
   $(".currently-playing .artist-name").text(currentAlbum.artist);
   $(".main-controls .play-pause").html(playerBarPauseButton);
+  setTotalTime(currentSongFromAlbum.duration);
 };
 
 var setSong = function(songNumber) {
