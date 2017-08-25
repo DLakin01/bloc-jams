@@ -50,12 +50,6 @@ var createSongRow = function(songNumber, songName, songLength) {
       }
       else {
         currentSoundFile.pause();
-        $('.seek-control .seek-bar .thumb').css({
-          "opacity": "0"
-        });
-        $('.seek-control .seek-bar .fill').css({
-          "opacity": "0"
-        });
         $(this).html(playButtonTemplate);
         $('.main-controls .play-pause').html(playerBarPlayButton);
       }
