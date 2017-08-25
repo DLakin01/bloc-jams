@@ -247,7 +247,6 @@ var togglePlayFromPlayerBar = function() {
     $songNumberCell.html(playButtonTemplate);
     $(this).html(playerBarPlayButton);
     currentSoundFile.pause();
-    });
   }
 }
 
