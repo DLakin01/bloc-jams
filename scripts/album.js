@@ -247,11 +247,6 @@ var togglePlayFromPlayerBar = function() {
     $songNumberCell.html(playButtonTemplate);
     $(this).html(playerBarPlayButton);
     currentSoundFile.pause();
-    $('.seek-control .seek-bar .thumb').css({
-      "opacity": "0"
-    });
-    $('.seek-control .seek-bar .fill').css({
-      "opacity": "0"
     });
   }
 }
