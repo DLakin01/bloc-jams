@@ -104,6 +104,7 @@ var setCurrentAlbum = function(album) {
   for(var i = 0; i < album.songs.length; i++) {
     var $newRow = createSongRow(i + 1, album.songs[i].title, album.songs[i].duration);
     $albumSongList.append($newRow);
+
   }
 };
 
@@ -175,6 +176,9 @@ var setUpSeekBars = function() {
       $(document).unbind('mousemove.thumb');
       $(document).unbind('mouseup.thumb');
     });
+    if (seekBarFillRatio == 1) {
+      nextSong;
+    };
   });
 };
 
@@ -267,7 +271,7 @@ if(currentSoundFile) {
   $('.seek-control .seek-bar .fill').css({
     "opacity": "0"
   });
-}
+ }
   currentlyPlayingSongNumber = songNumber;
   currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
   currentSoundFile = new buzz.sound(currentSongFromAlbum.audioUrl, {
@@ -275,6 +279,7 @@ if(currentSoundFile) {
     preload: true
   });
   setVolume(currentVolume)
+  currentSoundFile.bind("ended", function()
 };
 
 var seek = function(time) {
@@ -308,6 +313,8 @@ var currentVolume = 80;
 var $previousButton = $('.main-controls .previous');
 var $nextButton = $('.main-controls .next');
 var $playerControl = $('.main-controls .play-pause');
+var $currentTime = $('.seek-control .current-time');
+var songItem = currentSoundFile;
 
 $(document).ready(function() {
   albumPicker();
