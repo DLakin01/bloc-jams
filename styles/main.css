@@ -71,11 +71,14 @@ body {
   max-width: 56rem;
 }
 
-.column.third {
-  width: 100%;
+@media (max-width: 639 px) {
+
+  .column.third {
+    width: 100% !important;
+  }
 }
 
-@media (min-width: 650px) {
+@media (min-width: 640px) {
   html { font-size: 112%; }
 
   .column {

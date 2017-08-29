@@ -279,7 +279,6 @@ if(currentSoundFile) {
     preload: true
   });
   setVolume(currentVolume)
-  currentSoundFile.bind("ended", function()
 };
 
 var seek = function(time) {
