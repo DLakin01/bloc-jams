@@ -71,10 +71,11 @@ body {
   max-width: 56rem;
 }
 
-@media (max-width: 639 px) {
+@media (max-width: 639px) {
 
   .column.third {
-    width: 100% !important;
+    width: 100%;
+    height: auto !important;
   }
 }
 
